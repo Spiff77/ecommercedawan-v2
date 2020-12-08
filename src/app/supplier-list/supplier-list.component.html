@@ -1,0 +1,6 @@
+<h3>Suppliers List</h3>
+<div>
+  You have select {{this.selectedSupplier?.companyName}}
+</div>
+<app-supplier [supplier]="supp1" (prodOut)="selectSupplier($event)"></app-supplier>
+<app-supplier [supplier]="supp2" (prodOut)="selectSupplier($event)"></app-supplier>
