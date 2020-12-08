@@ -1,4 +1,5 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+import {Product} from '../model/Product';
 
 @Component({
   selector: 'app-product',
@@ -8,14 +9,13 @@ import {Component, HostListener, Input, OnInit} from '@angular/core';
 export class ProductComponent implements OnInit {
 
   @Input() product;
+  @Output('prodOut') output = new EventEmitter<Product>();
 
-  @HostListener('mouseenter', ['$event']) mouseenter(): void {
-    console.log('Entering a product', event);
+  @HostListener('click')
+  clickproduct(): void {
+    this.output.emit(this.product);
   }
 
-  @HostListener('mouseout') mouseout(): void {
-    console.log('Going out of a product');
-  }
 
   constructor() { }
 

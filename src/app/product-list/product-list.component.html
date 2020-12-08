@@ -1,3 +1,6 @@
 <h3>Products List</h3>
-<app-product [product]="prod1"></app-product>
-<app-product [product]="prod2"></app-product>
+<div>
+  You have select {{this.selectedProduct?.name}} ({{this.selectedProduct?.category}})
+</div>
+<app-product [product]="prod1" (prodOut)="selectProduct($event)"></app-product>
+<app-product [product]="prod2" (prodOut)="selectProduct($event)"></app-product>
