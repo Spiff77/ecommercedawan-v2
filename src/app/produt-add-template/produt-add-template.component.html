@@ -1,0 +1,30 @@
+<div class="errors">
+  <ul>
+    <li *ngIf="nameInput?.errors?.required">Name is required</li>
+    <li *ngIf="categoryInput.errors?.required">Category is required</li>
+    <li *ngIf="categoryInput.errors?.minlength">Category is too short</li>
+  </ul>
+</div>
+<form #productForm="ngForm"  (ngSubmit)="add(productForm.value)">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" #nameInput="ngModel" [(ngModel)]="product.name" required>
+  </div>
+  <div>
+    <label for="category">category</label>
+    <input type="text" id="category" name="category" [(ngModel)]="product.category" #categoryInput="ngModel" required minlength="3">
+  </div>
+  <div>
+    <label for="description">description</label>
+    <input type="text" id="description" formControlName="description">
+  </div>
+  <div>
+    <label for="price">price</label>
+    <input type="text" id="price" formControlName="price">
+  </div>
+  <div>
+    <label for="promo">promo</label>
+    <input type="text" id="promo" formControlName="promo">
+  </div>
+  <button type="submit">add</button>
+</form>

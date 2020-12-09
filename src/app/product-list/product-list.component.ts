@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from '../model/Product';
+import {Product} from '../model/product.model';
+import {ProductService} from '../product.service';
+
 
 @Component({
   selector: 'app-product-list',
@@ -8,18 +10,17 @@ import {Product} from '../model/Product';
 })
 export class ProductListComponent implements OnInit {
 
-  selectedProduct: Product = null;
+  products: Product[];
 
-  prod1 = new Product('The beattles - Abbey road', 'A good album', 'Music', 20, .2);
-  prod2 = new Product('1984', 'A good book', 'Book', 20, .2);
-
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.products = this.productService.findAll();
   }
 
-  selectProduct(product): void{
-    this.selectedProduct = product;
+  deleteProduct(id: number): void {
+    this.productService.delete(id);
+    this.ngOnInit();
   }
 
 }

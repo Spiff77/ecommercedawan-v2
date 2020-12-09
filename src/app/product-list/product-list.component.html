@@ -1,6 +1,2 @@
 <h3>Products List</h3>
-<div>
-  You have select {{this.selectedProduct?.name}} ({{this.selectedProduct?.category}})
-</div>
-<app-product [product]="prod1" (prodOut)="selectProduct($event)"></app-product>
-<app-product [product]="prod2" (prodOut)="selectProduct($event)"></app-product>
+<app-product *ngFor="let p of products" [product]="p" (output)="deleteProduct($event)"></app-product>

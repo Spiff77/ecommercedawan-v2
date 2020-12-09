@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Supplier} from './model/Supplier';
+import {Supplier} from './model/supplier.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,28 +7,34 @@ import {Supplier} from './model/Supplier';
 export class SupplierService {
 
   suppliers = [
-    new Supplier('Amazon', '123412341234'),
-    new Supplier('Swisscom', '1231231230')
+    new Supplier(1,  'AwesomeCompany', 1234123412341234),
+    new Supplier(2,  'AnotherCompany', 12341234123412349),
+    new Supplier(3,  'SomeCompany', 12341234123412343),
   ]
+
+  constructor() { }
+
+  add(supplier: Supplier): void{
+    this.suppliers.push(supplier);
+  }
+
+  delete(supplierId: number): void{
+    this.suppliers = this.suppliers.filter(s => s.id !== supplierId);
+  }
+
+  update(supplier: Supplier): void{
+    const supplierArr = this.suppliers.find(s => s.id === supplier.id)[0]
+    if (!supplierArr) { return null; }
+
+    const index = this.suppliers.indexOf(supplierArr);
+    this.suppliers[index] = supplier;
+  }
 
   findAll(): Supplier[] {
     return this.suppliers;
   }
 
-  findOne(companyName: string): Supplier {
-    return this.suppliers.find(s => s.companyName);
+  findOne(id: number): Supplier {
+    return this.suppliers.filter( s => s.id === id)[0];
   }
-
-  delete(companyName: string): void {
-    const supplierArr = this.suppliers.find(s => s.companyName);
-    const index = this.suppliers.indexOf(supplierArr);
-
-    this.suppliers.splice(index, 1);
-  }
-
-  add(supplier: Supplier): void {
-    this.suppliers.push(supplier);
-  }
-
-  constructor() { }
 }

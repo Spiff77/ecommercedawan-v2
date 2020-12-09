@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Supplier} from '../model/Supplier';
 import {SupplierService} from '../supplier.service';
+import {Supplier} from '../model/supplier.model';
 
 @Component({
   selector: 'app-supplier-list',

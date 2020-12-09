@@ -1,0 +1,35 @@
+
+<div class="errors">
+  <ul>
+    <li *ngIf="form.controls['name']?.errors?.required">Name is required</li>
+    <li *ngIf="form.controls['price']?.errors?.priceNotConform">Price is not conform</li>
+    <li *ngIf="form.controls['price']?.errors?.required">Price is required</li>
+    <li *ngIf="form.controls['category']?.errors?.notValidCategoryLength">Category need 3 char at least</li>
+    <li *ngIf="form.controls['promo']?.errors?.required">Promo is required</li>
+    <li *ngIf="form.controls['promo']?.errors?.max">Promo cannot be more than 99%</li>
+    <li *ngIf="form.controls['promo']?.errors?.priceToLow">Price with promo is too low</li>
+  </ul>
+</div>
+<form [formGroup]="form" (ngSubmit)="add()">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="name" placeholder="Joe">
+  </div>
+  <div>
+    <label for="category">category</label>
+    <input type="text" id="category" formControlName="category">
+  </div>
+  <div>
+    <label for="description">description</label>
+    <input type="text" id="description" formControlName="description">
+  </div>
+  <div>
+    <label for="price">price</label>
+    <input type="text" id="price" formControlName="price">
+  </div>
+  <div>
+    <label for="promo">promo</label>
+    <input type="text" id="promo" formControlName="promo">
+  </div>
+  <button type="submit">add</button>
+</form>
