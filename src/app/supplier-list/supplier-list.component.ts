@@ -9,9 +9,12 @@ import {Supplier} from '../model/Supplier';
 export class SupplierListComponent implements OnInit {
 
   selectedSupplier: Supplier = null;
+  filterStr = '';
 
-  supp1 = new Supplier('The beattles - Abbey road', '123412341234');
-  supp2 = new Supplier('1984', '1231231230');
+  suppliers = [
+    new Supplier('The beattles - Abbey road', '123412341234'),
+    new Supplier('1984', '1231231230')
+  ]
 
   constructor() { }
 
@@ -20,6 +23,10 @@ export class SupplierListComponent implements OnInit {
 
   selectSupplier(supplier): void{
     this.selectedSupplier = supplier;
+  }
+
+  triggerFilter(): Supplier[] {
+    return this.suppliers.filter(s => s.companyName.indexOf(this.filterStr) !== -1);
   }
 
 }

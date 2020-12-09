@@ -8,6 +8,7 @@ import {ProductComponent} from './product/product.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { SupplierListComponent } from './supplier-list/supplier-list.component';
 import { AccountNumberPipe } from './account-number.pipe';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AccountNumberPipe } from './account-number.pipe';
     AccountNumberPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

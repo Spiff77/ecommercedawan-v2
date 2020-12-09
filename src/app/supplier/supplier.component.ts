@@ -11,6 +11,8 @@ export class SupplierComponent implements OnInit {
   @Input() supplier;
   @Output('prodOut') output = new EventEmitter<Supplier>();
 
+
+
   @HostListener('click')
   clicksupplier(): void {
     this.output.emit(this.supplier);
