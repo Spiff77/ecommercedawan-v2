@@ -1,5 +1,6 @@
 import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {Supplier} from '../model/Supplier';
+import {SupplierService} from '../supplier.service';
 
 @Component({
   selector: 'app-supplier',
@@ -19,9 +20,13 @@ export class SupplierComponent implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(private supplierService: SupplierService) { }
 
   ngOnInit(): void {
+  }
+
+  deleteSupplier(): void{
+    this.supplierService.delete(this.supplier.companyName);
   }
 
 }

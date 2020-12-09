@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Supplier} from '../model/Supplier';
+import {SupplierService} from '../supplier.service';
 
 @Component({
   selector: 'app-supplier-list',
@@ -11,14 +12,12 @@ export class SupplierListComponent implements OnInit {
   selectedSupplier: Supplier = null;
   filterStr = '';
 
-  suppliers = [
-    new Supplier('The beattles - Abbey road', '123412341234'),
-    new Supplier('1984', '1231231230')
-  ]
+  suppliers: Supplier[];
 
-  constructor() { }
+  constructor(private supplierService: SupplierService) { }
 
   ngOnInit(): void {
+    this.suppliers = this.supplierService.findAll();
   }
 
   selectSupplier(supplier): void{
