@@ -16,9 +16,12 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomeComponent } from './home/home.component';
 import {RouterModule, Routes} from '@angular/router';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import {ConfirmGuard} from './confirm.guard';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {InterceptInterceptor} from './intercept.interceptor';
 
 const routes: Routes = [
-  {path: 'products/add', component: ProductAddComponent},
+  {path: 'products/add', component: ProductAddComponent, canDeactivate: [ConfirmGuard]},
   {path: 'products/:id', component: ProductDetailComponent},
   {path: 'products', component: ProductListComponent},
   {path: 'suppliers/add', component: SupplierListComponent},
@@ -49,9 +52,12 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

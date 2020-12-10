@@ -1,3 +1,6 @@
 <h1>My Awesome SPA</h1>
 <app-menu></app-menu>
+<div *ngFor="let p of obv | async">
+  {{p.name}}
+</div>
 <router-outlet></router-outlet>
