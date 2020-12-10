@@ -1,42 +1,40 @@
 import { Injectable } from '@angular/core';
 import {Product} from './model/product.model';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  products = [
-    new Product(1,  'Franck Zappa - Joe\'s garage', 'music', 'Zappa at his best', 25, .2),
-    new Product(2,  'Pink Floyd - Wish you were here', 'music', 'Pink floyd at his best', 25, .5),
-    new Product(3,  '1984', 'book', 'Orwell at his best', 25, 0),
+  url = 'http://localhost:8080/training/api/products/';
 
-  ]
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
-
-  add(product: Product): void{
-    this.products.push(product);
+  add(product: Product): Observable<Product>{
+    return this.http.post(this.url, product) as Observable<Product>;
   }
 
-  delete(productId: number): void{
-    const productArr = this.products.find(s => s.id === productId)
-    this.products.splice(this.products.indexOf(productArr), 1);
+  delete(productId: number): Observable<Product>{
+    return this.http.delete(this.url + '/' + productId)  as Observable<Product>;
   }
 
-  update(product: Product): void{
-    const productArr = this.products.find(s => s.id === product.id)
-    if (!productArr) { return null; }
-
-    const index = this.products.indexOf(productArr);
-    this.products[index] = product;
+  update(product: Product): Observable<Product>{
+    return this.http.put(this.url, product) as Observable<Product>;
   }
 
-  findAll(): Product[] {
-    return this.products;
+  findAll(): Observable<Product[]> {
+
+    return this.http.get(this.url)
+      .pipe(
+        map( v => v['_embedded']),
+        map( v => v['products'])
+      );
   }
 
-  findOne(id: number): Product {
-    return this.products.find( s => s.id === id);
+    findOne(id: number): Observable<any> {
+    return this.http.get(`${this.url}/${id}`);
   }
 }
