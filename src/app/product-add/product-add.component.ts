@@ -31,7 +31,7 @@ export class ProductAddComponent implements OnInit {
   add(): void {
     this.formSubmitted = true;
     if (this.form.valid) {
-      this.productservice.add(this.form.value);
+      this.productservice.add(this.form.value).subscribe();
       this.router.navigateByUrl('/products');
     }
   }

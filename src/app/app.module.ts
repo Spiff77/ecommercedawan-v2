@@ -19,13 +19,19 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import {ConfirmGuard} from './confirm.guard';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {InterceptInterceptor} from './intercept.interceptor';
+import { ProductDashboardComponent } from './product-dashboard/product-dashboard.component';
+import { SupplierDashboardComponent } from './supplier-dashboard/supplier-dashboard.component';
 
 const routes: Routes = [
-  {path: 'products/add', component: ProductAddComponent, canDeactivate: [ConfirmGuard]},
-  {path: 'products/:id', component: ProductDetailComponent},
-  {path: 'products', component: ProductListComponent},
-  {path: 'suppliers/add', component: SupplierListComponent},
-  {path: 'suppliers', component: SupplierListComponent},
+  {path : 'products', component: ProductDashboardComponent, children: [
+    {path: 'add', component: ProductAddComponent},
+    {path: ':id', component: ProductDetailComponent},
+    {path: '', component: ProductListComponent},
+  ]},
+  {path : 'supplier', component: SupplierDashboardComponent, children: [
+    {path: 'add', component: SupplierListComponent},
+    {path: '', component: SupplierListComponent},
+    ]},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: ErrorPageComponent },
 ]
@@ -43,10 +49,11 @@ const routes: Routes = [
     ProductListComponent,
     RegisterComponent,
     ProdutAddTemplateComponent,
-    ProdutAddTemplateComponent,
     ErrorPageComponent,
     HomeComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductDashboardComponent,
+    SupplierDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +63,6 @@ const routes: Routes = [
     HttpClientModule
   ],
   providers: [
-    //{provide: HTTP_INTERCEPTORS, useClass: InterceptInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

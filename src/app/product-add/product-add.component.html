@@ -31,5 +31,5 @@
     <label for="promo">promo</label>
     <input type="text" id="promo" formControlName="promo">
   </div>
-  <button type="submit">add</button>
+  <button type="submit" [disabled]="!form.valid">add</button>
 </form>

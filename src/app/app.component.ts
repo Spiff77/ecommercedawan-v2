@@ -13,23 +13,14 @@ import {ProductService} from './product.service';
 export class AppComponent implements OnInit{
   title = 'ecommerce';
 
-  products: Observable<Product[]>;
-  filterStr = '';
 
-  constructor(private ps: ProductService) {
+  constructor() {
 
   }
 
   ngOnInit(): void {
-    this.products = this.ps.findAll();
   }
 
-  filter(): Observable<Product[]> {
-   return this.products.pipe(
-      map(projects => projects
-        .filter(proj => proj.name.includes(this.filterStr))
-      )
-    );
-  }
+
 }
 //
