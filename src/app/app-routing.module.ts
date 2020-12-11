@@ -10,6 +10,7 @@ const routes: Routes = [
       {path: 'add', component: SupplierListComponent},
       {path: '', component: SupplierListComponent},
     ]},
+  {path: 'products', loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule)},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
 ]
 @NgModule({

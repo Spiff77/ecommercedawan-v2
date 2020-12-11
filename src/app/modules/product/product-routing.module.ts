@@ -5,11 +5,12 @@ import {ProductAddComponent} from './components/product-add/product-add.componen
 import {ProductDetailComponent} from './components/product-detail/product-detail.component';
 import {ProductListComponent} from './components/product-list/product-list.component';
 
-const routes: Routes = [  {path : 'products', component: ProductDashboardComponent, children: [
-    {path: 'add', component: ProductAddComponent},
-    {path: ':id', component: ProductDetailComponent},
-    {path: '', component: ProductListComponent},
-  ]},];
+const routes: Routes = [
+  {path : '', component: ProductDashboardComponent, children: [
+  {path: 'add', component: ProductAddComponent},
+  {path: ':id', component: ProductDetailComponent},
+  {path: '', component: ProductListComponent},
+]}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
