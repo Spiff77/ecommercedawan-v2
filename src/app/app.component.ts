@@ -3,7 +3,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {filter, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Product} from './model/product.model';
-import {ProductService} from './product.service';
+import {ProductService} from './product/services/product.service';
 
 @Component({
   selector: 'app-root',
